@@ -4,12 +4,10 @@ This Template was copied from the azure-quickstart-templates.  It has been modif
 
 Deploys a SLURM cluster with head node and n worker nodes.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fslurm-on-sles12-hpc%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgrandparoach%2FAzure-HPC-templates%2Fmaster%2FSlurm-on-SLES12-HPC%2Fazuredeploy.json" target="_blank">
    <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fslurm-on-sles12-hpc%2Fazuredeploy.json" target="_blank">
-    <img src="http://armviz.io/visualizebutton.png"/>
-</a>
+
 
 1. Fill in the 3 mandatory parameters - public DNS name, a storage account to hold VM image, and admin user password.
 
