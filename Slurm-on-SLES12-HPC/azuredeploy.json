@@ -154,7 +154,7 @@
     },
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
-    "templateBaseUrl": "https://raw.githubusercontent.com/grandparoach/Azure-HPC-templates/master/Slurm-on-SLES12-HPC/",
+    "templateBaseUrl": "https://raw.githubusercontent.com/grandparoach/Azure-HPC-templates/TR24/Slurm-on-SLES12-HPC/",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('masterVMName'), ' ', variables('workerVMName'), ' ', parameters('workerNodeCount'), ' ', parameters('hpcUserName'), ' ', variables('templateBaseUrl'))]",
     "storageAccountType": "Standard_LRS"
   },
