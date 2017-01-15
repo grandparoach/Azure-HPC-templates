@@ -30,9 +30,10 @@
     },
     "headNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_A8",
+      "defaultValue": "Standard_A2_v2",
       "allowedValues": [
-        "Standard_A4",
+        "Standard_A2_v2",
+	"Standard_A4",
         "Standard_A7",
         "Standard_A8",
         "Standard_A9",
@@ -57,7 +58,7 @@
     },
     "workerNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_A9",
+      "defaultValue": "Standard_A1",
       "allowedValues": [
         "Standard_A1",
         "Standard_A2",
@@ -297,126 +298,6 @@
               "lun": 3,
               "vhd": {
                 "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk3.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk4",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 4,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk4.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk5",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 5,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk5.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk6",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 6,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk6.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk7",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 7,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk7.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk8",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 8,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk8.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk9",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 9,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk9.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk10",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 10,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk10.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk11",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 11,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk11.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk12",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 12,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk12.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk13",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 13,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk13.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk14",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 14,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk14.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk15",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 15,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk15.vhd')]"
               },
               "caching": "None",
               "createOption": "Empty"
