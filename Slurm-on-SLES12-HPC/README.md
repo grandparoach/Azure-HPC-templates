@@ -7,7 +7,7 @@ This Template was copied from the azure-quickstart-templates.  It has been modif
 
 Deploys a SLURM cluster with head node and n worker nodes.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgrandparoach%2FAzure-HPC-templates%2Fmaster%2FSlurm-on-SLES12-HPC%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgrandparoach%2FAzure-HPC-templates%2FTR24%2FSlurm-on-SLES12-HPC%2Fazuredeploy.json" target="_blank">
    <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
