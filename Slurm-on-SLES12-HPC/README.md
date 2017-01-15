@@ -1,5 +1,8 @@
 # Azure SLES 12 HPC ARM Template
 
+This Branch was created for the TR24 Intrustor led lab.  It has been modified to allow it to be deployed on a total of 4 cores.
+The NFS Server will have only 4 attached drives instead of 16.
+
 This Template was copied from the azure-quickstart-templates.  It has been modified to include the use of an SSH Key for authentication and Premium Storage for the NFS Server.
 
 Deploys a SLURM cluster with head node and n worker nodes.
