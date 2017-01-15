@@ -1,5 +1,7 @@
 # Azure SLES 12 HPC ARM Template
 
+This Template was copied from the azure-quickstart-templates.  It has been modified to include the use of an SSH Key for authentication and Premium Storage for the NFS Server.
+
 Deploys a SLURM cluster with head node and n worker nodes.
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fslurm-on-sles12-hpc%2Fazuredeploy.json" target="_blank">
