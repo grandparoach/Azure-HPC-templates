@@ -64,7 +64,7 @@ add_sdk_repo()
 	
 	wget $TEMPLATE_BASE_URL/sles12sdk.repo
 	
-	cp sles12sdk.repo "$repoFile"
+cp sles12sdk.repo "$repoFile"
 
     # init new repo
     zypper -n search nfs > /dev/null 2>&1
@@ -92,7 +92,7 @@ setup_data_disks()
 	createdPartitions=""
 
     # Loop through and partition disks until not found
-    for disk in sdc sdd sde sdf; do
+    for disk in sdc sdd sde; do
         fdisk -l /dev/$disk || break
         fdisk /dev/$disk << EOF
 n
