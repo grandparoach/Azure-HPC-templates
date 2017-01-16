@@ -30,27 +30,11 @@
     },
     "headNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_D2_v2",
+      "defaultValue": "Standard_DS2_v2",
       "allowedValues": [
-        "Standard_D2_v2",
-	"Standard_A4",
-        "Standard_A7",
-        "Standard_A8",
-        "Standard_A9",
-        "Standard_A10",
-        "Standard_A11",
-        "Standard_D4",
-		"Standard_D13",
-		"Standard_D14",
-        "Standard_DS4",
-		"Standard_DS13",
-		"Standard_DS14",
-		"Standard_G3",
-		"Standard_G4",
-		"Standard_G5",
-		"Standard_GS3",
-		"Standard_GS4",
-		"Standard_GS5"
+        "Standard_DS4_v2",
+		"Standard_DS13_v2",
+		"Standard_DS14_v2"
       ],
       "metadata": {
         "description": "Size of the head node."
@@ -72,35 +56,13 @@
         "Standard_A10",
         "Standard_A11",
 		"Standard_D1_v2",
-		"Standard_D2",
-		"Standard_D3",
-        "Standard_D4",
-		"Standard_D11",
-		"Standard_D12",
-		"Standard_D13",
-		"Standard_D14",
-		"Standard_DS1",
-		"Standard_DS2",
-		"Standard_DS3",
-		"Standard_DS4",
-		"Standard_D11",
-		"Standard_D12",
-		"Standard_D13",
-		"Standard_D14",
-		"Standard_DS11",
-		"Standard_DS12",
-		"Standard_DS13",
-		"Standard_DS14",
-		"Standard_G1",
-		"Standard_G2",
-		"Standard_G3",
-		"Standard_G4",
-		"Standard_G5",
-		"Standard_GS1",
-		"Standard_GS2",
-		"Standard_GS3",
-		"Standard_GS4",
-		"Standard_GS5"
+		"Standard_D2_v2",
+		"Standard_D3_v2",
+        "Standard_D4_v2",
+		"Standard_D11_v2",
+		"Standard_D12_v2",
+		"Standard_D13_v2",
+		"Standard_D14_v2"
       ],
       "metadata": {
         "description": "Size of the worker nodes."
@@ -125,6 +87,7 @@
     "imagePublisher": "SUSE",
     "imageOffer": "SLES-HPC",
     "slesOSVersion": "12",
+    "premiumStorageAccountName": "[concat('prst', uniqueString(resourceGroup().id))]",
     "newStorageAccountName": "[concat('st', uniqueString(resourceGroup().id))]",
     "vmStorageAccountContainerName": "vhd",
     "OSDiskName": "osdisk",
@@ -159,6 +122,15 @@
     "storageAccountType": "Standard_LRS"
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('premiumStorageAccountName')]",
+      "apiVersion": "[variables('armApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "accountType": "Premium_LRS"
+      }
+    },
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('newStorageAccountName')]",
@@ -234,7 +206,7 @@
       "name": "[variables('masterVMName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', variables('newStorageAccountName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', variables('premiumStorageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
       "properties": {
@@ -256,7 +228,7 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),variables('masterVMName'),'.vhd')]"
+              "uri": "[concat('http://',variables('premiumStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),variables('masterVMName'),'.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -267,7 +239,7 @@
               "diskSizeGB": "[parameters('dataDiskSize')]",
               "lun": 0,
               "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk0.vhd')]"
+                "Uri":  "[concat('http://',variables('premiumStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk0.vhd')]"
               },
               "caching": "None",
               "createOption": "Empty"
@@ -277,7 +249,7 @@
               "diskSizeGB": "[parameters('dataDiskSize')]",
               "lun": 1,
               "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk1.vhd')]"
+                "Uri":  "[concat('http://',variables('premiumStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk1.vhd')]"
               },
               "caching": "None",
               "createOption": "Empty"
@@ -287,7 +259,7 @@
               "diskSizeGB": "[parameters('dataDiskSize')]",
               "lun": 2,
               "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk2.vhd')]"
+                "Uri":  "[concat('http://',variables('premiumStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk2.vhd')]"
               },
               "caching": "None",
               "createOption": "Empty"
@@ -297,7 +269,7 @@
               "diskSizeGB": "[parameters('dataDiskSize')]",
               "lun": 3,
               "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk3.vhd')]"
+                "Uri":  "[concat('http://',variables('premiumStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk3.vhd')]"
               },
               "caching": "None",
               "createOption": "Empty"
