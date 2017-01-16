@@ -2,12 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "dnsPrefix": {
-      "type": "string",
-      "metadata": {
-        "description": "Unique public dns prefix where the master node will be exposed"
-      }
-    },
     "adminUserName": {
       "type": "string",
       "defaultValue": "azureuser",
@@ -15,11 +9,30 @@
         "description": "User name for the Virtual Machine. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
-    "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Admin password. Pick a complex password with uppercase letters, lowercase letters, digits, and symbols. The password should not be longer than 16. Otherwise you'll get a BadRequest error."
-      }
+     "authenticationType": {
+            "type": "string",
+            "defaultValue": "password",
+            "allowedValues": [
+              "password",
+              "sshPublicKey"
+            ],
+            "metadata": {
+              "description": "Authentication type for the virtual machines"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+              "description": "Admin password for the virtual machines"
+            }
+        },
+        "sshPublicKey": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+              "description": "SSH public key that will be included on all nodes. The OpenSSH public key can be generated with tools like ssh-keygen on Linux or OS X."
+            }
     },
     "hpcUserName": {
       "type": "string",
@@ -32,7 +45,7 @@
       "type": "string",
       "defaultValue": "Standard_DS2_v2",
       "allowedValues": [
-        "Standard_DS4_v2",
+        "Standard_DS2_v2",
 		"Standard_DS13_v2",
 		"Standard_DS14_v2"
       ],
@@ -117,6 +130,20 @@
     },
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
+    "sshKeyPath": "[concat('/home/',parameters('adminUsername'),'/.ssh/authorized_keys')]",
+        "linuxConfiguration_sshPublicKey": {
+            "disablePasswordAuthentication": "true",
+            "ssh": {
+              "publicKeys": [
+                {
+                "path": "[variables('sshKeyPath')]",
+                "keyData": "[parameters('sshPublicKey')]"
+                }
+              ]
+            }
+    },
+    "linuxConfiguration_password": { },
+    "linuxConfiguration": "[variables(concat('linuxConfiguration_',parameters('authenticationType')))]",
     "templateBaseUrl": "https://raw.githubusercontent.com/grandparoach/Azure-HPC-templates/TR24/Slurm-on-SLES12-HPC/",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('masterVMName'), ' ', variables('workerVMName'), ' ', parameters('workerNodeCount'), ' ', parameters('hpcUserName'), ' ', variables('templateBaseUrl'))]",
     "storageAccountType": "Standard_LRS"
@@ -167,10 +194,7 @@
       "name": "[variables('publicIPAddressName')]",
       "location": "[resourceGroup().location]",
       "properties": {
-        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
-        "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsPrefix')]"
-        }
+        "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
       }
     },
     {
@@ -216,7 +240,8 @@
         "osProfile": {
           "computername": "[variables('masterVMName')]",
           "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "adminPassword": "[parameters('adminPassword')]",
+          "linuxConfiguration": "[variables('linuxConfiguration')]"
         },
         "storageProfile": {
           "imageReference": {
@@ -379,7 +404,8 @@
         "osProfile": {
           "computername": "[concat(variables('workerVMName'), copyindex())]",
           "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "adminPassword": "[parameters('adminPassword')]",
+          "linuxConfiguration": "[variables('linuxConfiguration')]"
         },
         "storageProfile": {
           "imageReference": {
