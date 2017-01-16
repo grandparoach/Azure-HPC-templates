@@ -4,14 +4,14 @@
   "parameters": {
     "adminUserName": {
       "type": "string",
-      "defaultValue": "azureuser",
+      "defaultValue": "labuser",
       "metadata": {
         "description": "User name for the Virtual Machine. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
      "authenticationType": {
             "type": "string",
-            "defaultValue": "password",
+            "defaultValue": "sshPublicKey",
             "allowedValues": [
               "password",
               "sshPublicKey"
@@ -285,16 +285,6 @@
               "lun": 2,
               "vhd": {
                 "Uri":  "[concat('http://',variables('premiumStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk2.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk3",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 3,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('premiumStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk3.vhd')]"
               },
               "caching": "None",
               "createOption": "Empty"
