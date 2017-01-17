@@ -92,7 +92,7 @@ setup_data_disks()
 	createdPartitions=""
 
     # Loop through and partition disks until not found
-    for disk in sdc sdd sde; do
+    for disk in sdc sdd; do
         fdisk -l /dev/$disk || break
         fdisk /dev/$disk << EOF
 n
