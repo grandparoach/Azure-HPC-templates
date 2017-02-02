@@ -4,7 +4,7 @@
   "parameters": {
     "adminUserName": {
       "type": "string",
-      "defaultValue": "azureuser",
+      "defaultValue": "labuser",
       "metadata": {
         "description": "User name for the Virtual Machine. Pick a valid username otherwise there will be a BadRequest error."
       }
@@ -87,13 +87,6 @@
       "defaultValue": 2,
       "metadata": {
         "description": "This template creates N worker node. Use workerNodeCount to specify that N."
-      }
-    },
-    "dataDiskSize": {
-      "type": "int",
-      "defaultValue": 128,
-      "metadata": {
-        "description": "The size in GB of each data disk that is attached to the VM.  A RAID-0 volume is created with all data disks that is dataDiskSize * dataDiskCount in size."
       }
     }
   },
@@ -248,29 +241,7 @@
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
-          },
-          "dataDisks": [
-            {
-              "name": "datadisk0",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 0,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk0.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            },
-            {
-              "name": "datadisk1",
-              "diskSizeGB": "[parameters('dataDiskSize')]",
-              "lun": 1,
-              "vhd": {
-                "Uri":  "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('masterVMName'),'-datadisk1.vhd')]"
-              },
-              "caching": "None",
-              "createOption": "Empty"
-            }
-          ]
+          }  
         },
         "networkProfile": {
           "networkInterfaces": [
